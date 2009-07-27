@@ -1,0 +1,4 @@
+usr/include/X11/*
+usr/lib/libFS.a
+usr/lib/libFS.so
+usr/lib/pkgconfig/libfs.pc
