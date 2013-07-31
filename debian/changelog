@@ -1,3 +1,9 @@
+libfs (2:1.0.2-1+squeeze1) oldstable-security; urgency=low
+
+  * CVE-2013-1996
+
+ -- Moritz Muehlenhoff <jmm@debian.org>  Tue, 14 May 2013 19:25:14 +0000
+
 libfs (2:1.0.2-1) unstable; urgency=low
 
   * New upstream release.
