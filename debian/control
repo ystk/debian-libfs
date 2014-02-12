@@ -2,16 +2,32 @@ Source: libfs
 Section: x11
 Priority: optional
 Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
-Uploaders: David Nusinow <dnusinow@debian.org>, Julien Cristau <jcristau@debian.org>, Brice Goglin <bgoglin@debian.org>
-Build-Depends: debhelper (>= 5.0.0), pkg-config, x11proto-core-dev (>= 6.8.99.15+cvs.20050722), x11proto-fonts-dev, xtrans-dev
-Standards-Version: 3.8.2
+Uploaders: Cyril Brulebois <kibi@debian.org>
+Build-Depends:
+ pkg-config,
+ x11proto-core-dev (>= 6.8.99.15+cvs.20050722),
+ x11proto-fonts-dev,
+ xtrans-dev,
+ automake,
+ libtool,
+ xutils-dev,
+# DEB_HOST_MULTIARCH
+ dpkg-dev (>= 1.16),
+# misc:Pre-Depends
+ debhelper (>= 8.1.3),
+Standards-Version: 3.9.3
 Vcs-Git: git://git.debian.org/git/pkg-xorg/lib/libfs
 Vcs-Browser: http://git.debian.org/?p=pkg-xorg/lib/libfs.git
 
 Package: libfs6
 Section: libs
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Multi-Arch: same
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
 Description: X11 Font Services library
  libFS, the Font Services library, provides various functions useful to
  X11 font servers, and clients connecting to font servers.  It is not used
@@ -19,8 +35,6 @@ Description: X11 Font Services library
  .
  More information about X.Org can be found at:
  <URL:http://www.X.org>
- <URL:http://xorg.freedesktop.org>
- <URL:http://lists.freedesktop.org/mailman/listinfo/xorg>
  .
  This module can be found at
  git://anongit.freedesktop.org/git/xorg/lib/libFS
@@ -29,7 +43,13 @@ Package: libfs6-dbg
 Section: debug
 Architecture: any
 Priority: extra
-Depends: ${shlibs:Depends}, ${misc:Depends}, libfs6 (= ${binary:Version})
+Multi-Arch: same
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+ libfs6 (= ${binary:Version}),
 Description: X11 Font Services library (debug package)
  libFS, the Font Services library, provides various functions useful to
  X11 font servers, and clients connecting to font servers.  It is not used
@@ -40,8 +60,6 @@ Description: X11 Font Services library (debug package)
  .
  More information about X.Org can be found at:
  <URL:http://www.X.org>
- <URL:http://xorg.freedesktop.org>
- <URL:http://lists.freedesktop.org/mailman/listinfo/xorg>
  .
  This module can be found at
  git://anongit.freedesktop.org/git/xorg/lib/libFS
@@ -49,8 +67,13 @@ Description: X11 Font Services library (debug package)
 Package: libfs-dev
 Section: libdevel
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libfs6 (= ${binary:Version}), x11proto-core-dev, x11proto-fonts-dev
-Pre-Depends: x11-common (>= 1:7.0.0)
+Multi-Arch: same
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+ libfs6 (= ${binary:Version}),
+ x11proto-core-dev,
+ x11proto-fonts-dev,
 Description: X11 Font Services library (development headers)
  libFS, the Font Services library, provides various functions useful to
  X11 font servers, and clients connecting to font servers.  It is not
@@ -61,8 +84,6 @@ Description: X11 Font Services library (development headers)
  .
  More information about X.Org can be found at:
  <URL:http://www.X.org>
- <URL:http://xorg.freedesktop.org>
- <URL:http://lists.freedesktop.org/mailman/listinfo/xorg>
  .
  This module can be found at
  git://anongit.freedesktop.org/git/xorg/lib/libFS

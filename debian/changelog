@@ -1,3 +1,44 @@
+libfs (2:1.0.4-1+deb7u1) wheezy-security; urgency=high
+
+  * Sign extension issue and integer overflow in FSOpenServer()
+    [CVE-2013-1996]
+
+ -- Julien Cristau <jcristau@debian.org>  Mon, 13 May 2013 23:32:48 +0200
+
+libfs (2:1.0.4-1) unstable; urgency=low
+
+  * New upstream release.
+  * Delete debian/xsfbs/, it's no longer used in this package.
+  * Don't require fakeroot for debian/rules clean.
+  * Remove David Nusinow and Brice Goglin from Uploaders.
+  * Run autoreconf at build time.
+  * Add build-arch and build-indep debian/rules targets.
+  * Build for multiarch.
+  * Install FSlib.txt in libfs-dev.
+  * Bump Standards-Version to 3.9.3.
+
+ -- Julien Cristau <jcristau@debian.org>  Sun, 25 Mar 2012 17:43:10 +0200
+
+libfs (2:1.0.3-1) unstable; urgency=low
+
+  [ Timo Aaltonen ]
+  * Drop pre-dependency on x11-common from libfs-dev. This was needed
+    for upgrades from sarge.
+
+  [ Julien Cristau ]
+  * Remove myself from Uploaders.
+  * Rename the build directory to not include DEB_BUILD_GNU_TYPE for no
+    good reason.  Thanks, Colin Watson!
+
+  [ Cyril Brulebois ]
+  * New upstream release.
+  * Wrap build-deps.
+  * Switch from --list-missing to --fail-missing for additional safety.
+  * Exclude libFS.la from dh_install accordingly.
+  * Add myself to Uploaders.
+
+ -- Cyril Brulebois <kibi@debian.org>  Fri, 19 Nov 2010 01:00:28 +0100
+
 libfs (2:1.0.2-1) unstable; urgency=low
 
   * New upstream release.
