@@ -10,16 +10,6 @@
 # set this to the name of the main shlib's binary package
 PACKAGE = libfs6
 
-CFLAGS = -Wall -g
-ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
-	CFLAGS += -O0
-else
-	CFLAGS += -O2
-endif
-ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
-	INSTALL_PROGRAM += -s
-endif
-
 DEB_HOST_ARCH      ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
 DEB_HOST_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
@@ -29,6 +19,7 @@ ifeq ($(DEB_BUILD_GNU_TYPE), $(DEB_HOST_GNU_TYPE))
 else
 	confflags += --build=$(DEB_BUILD_GNU_TYPE) --host=$(DEB_HOST_GNU_TYPE)
 endif
+confflags += $(shell DEB_CFLAGS_MAINT_APPEND=-Wall dpkg-buildflags --export=configure)
 
 build: build-arch
 build-indep:
@@ -41,8 +32,9 @@ build-stamp:
 	cd build && \
 	../configure --prefix=/usr --mandir=\$${prefix}/share/man \
 	             --libdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH) \
-	             --infodir=\$${prefix}/share/info $(confflags) \
-	             CFLAGS="$(CFLAGS)" 
+	             --infodir=\$${prefix}/share/info \
+		     --disable-silent-rules \
+		     $(confflags)
 	cd build && $(MAKE)
 	>$@
 
@@ -63,7 +55,7 @@ clean:
 install: build
 	dh_testdir
 	dh_testroot
-	dh_clean -k
+	dh_prep
 	dh_installdirs
 
 	cd build && $(MAKE) DESTDIR=$(CURDIR)/debian/tmp install
@@ -75,7 +67,7 @@ binary-arch: build install
 
 	dh_installdocs
 	dh_install --sourcedir=debian/tmp --fail-missing -XlibFS.la
-	dh_installchangelogs ChangeLog
+	dh_installchangelogs
 	dh_link
 	dh_strip --dbg-package=$(PACKAGE)-dbg
 	dh_compress

@@ -1,3 +1,20 @@
+libfs (2:1.0.6-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Remove Cyril from Uploaders.
+  * Use dh_prep instead of dh_clean -k.
+
+ -- Julien Cristau <jcristau@debian.org>  Sun, 13 Jul 2014 01:11:38 +0200
+
+libfs (2:1.0.5-1) unstable; urgency=low
+
+  * New upstream release.
+  * Bump debhelper compat level to 7.
+  * Use dpkg-buildflags.
+  * Disable silent rules.
+
+ -- Julien Cristau <jcristau@debian.org>  Sun, 16 Jun 2013 14:16:20 +0200
+
 libfs (2:1.0.4-1+deb7u1) wheezy-security; urgency=high
 
   * Sign extension issue and integer overflow in FSOpenServer()
